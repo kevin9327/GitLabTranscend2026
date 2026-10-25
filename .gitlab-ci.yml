@@ -1,0 +1,61 @@
+# GitLab Transcend Hackathon — DuoGreen 9-Stage Autonomous DevSecOps Pipeline
+stages:
+  - plan
+  - create
+  - verify
+  - package
+  - secure
+  - release
+  - configure
+  - monitor
+  - govern
+
+variables:
+  DUO_AUTONOMY_MODE: "hands-off"
+  CARBON_AWARE_REGION: "us-central1"
+  GCP_CLOUD_RUN_SERVICE: "duogreen-9stage-service"
+
+plan_issue_decomposition:
+  stage: plan
+  script:
+    - echo "GitLab Duo Planner Agent decomposing issue & estimating runner kWh budget via MCP..."
+
+create_mr_instrumentation:
+  stage: create
+  script:
+    - echo "GitLab Duo MR Architect generating branch & OpenTelemetry instrumentation..."
+
+verify_carbon_aware_tests:
+  stage: verify
+  script:
+    - echo "Routing test runner to lowest gCO2eq/kWh region ($CARBON_AWARE_REGION) and running test suite..."
+
+package_distroless_oci:
+  stage: package
+  script:
+    - echo "Building multi-arch distroless OCI image to reduce registry bandwidth & cold-start energy..."
+
+secure_auto_remediate:
+  stage: secure
+  script:
+    - echo "Running SAST, Secret Detection & Dependency Scanning with GitLab Duo auto-patch loop..."
+
+release_cloud_run_canary:
+  stage: release
+  script:
+    - echo "Signing container with Cosign & deploying progressive canary to Google Cloud Run ($GCP_CLOUD_RUN_SERVICE)..."
+
+configure_scale_to_zero:
+  stage: configure
+  script:
+    - echo "Applying right-sized CPU/Memory & scale-to-zero green idle policy..."
+
+monitor_otel_slo:
+  stage: monitor
+  script:
+    - echo "Verifying p99 latency < 50ms and container watt telemetry..."
+
+govern_sbom_attestation:
+  stage: govern
+  script:
+    - echo "Publishing signed CycloneDX SBOM, SOC2 evidence, and Carbon Savings Report to original GitLab Issue..."

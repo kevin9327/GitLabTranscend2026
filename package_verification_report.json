@@ -1,0 +1,15 @@
+{
+  "competition": "Devpost \u2014 GitLab + AI Hackathon (Transcend 2026)",
+  "directory": "GitLabTranscend2026",
+  "prize_pool_cash": "$65,000 USD Cash Pool",
+  "banner_verified": true,
+  "banner_size_bytes": 115611,
+  "files_verified": [
+    "LICENSE",
+    "README.md",
+    "banner.png",
+    "index.html"
+  ],
+  "verification_status": "PASSED_FULL_STACK_PACKAGE_VERIFICATION",
+  "sha256": "9cc08b737dd6da780c161f4a1caaec982eb38763126e14d79ad11d7bc8c5b47b"
+}

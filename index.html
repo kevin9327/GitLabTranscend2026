@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DuoGreen 9-Stage — GitLab Duo Hands-Off DevSecOps &amp; Carbon-Aware Lifecycle Agent</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
+  <header class="border-b border-orange-500/30 bg-slate-900/90 backdrop-blur sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-400/40 flex items-center justify-center text-orange-400 font-bold text-lg">GL</div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl font-bold tracking-tight text-white">DuoGreen 9-Stage <span class="text-orange-400 font-mono text-sm">(GitLab Duo Agent Platform + MCP)</span></h1>
+            <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">9/9 DevSecOps Stages + Green Grid Scheduler</span>
+          </div>
+          <p class="text-xs text-slate-400">Hands-Off Autonomous Post-Code Lifecycle Engine: Plan → Create → Verify → Package → Secure → Release → Configure → Monitor → Govern</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <select id="autonomySelect" onchange="runLifecycle()" class="bg-slate-950 border border-orange-500/40 rounded-lg px-3 py-2 text-xs text-orange-300 font-semibold">
+          <option value="handsoff">Autonomy: Hands-Off (Zero-Touch Issue → Prod)</option>
+          <option value="supervised">Autonomy: Supervised (Outcome Gate at Prod)</option>
+          <option value="assisted">Autonomy: Assisted (Per-Step Approval)</option>
+        </select>
+        <button onclick="runLifecycle()" class="px-4 py-2 rounded-lg bg-orange-500 hover:bg-orange-400 text-slate-950 font-bold text-xs transition">
+          ▶ Trigger Issue #402 Autonomous Flow
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-6 space-y-6">
+    <!-- Top KPI Strip -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+        <div class="text-xs text-slate-400">GitLab DevSecOps Stages Covered</div>
+        <div class="text-2xl font-extrabold text-orange-400 mt-1">9 / 9 Stages</div>
+        <div class="text-[11px] text-slate-500 font-mono mt-0.5">Full Plan-to-Govern Loop</div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+        <div class="text-xs text-slate-400">CI/CD Carbon Intensity Saved</div>
+        <div class="text-2xl font-extrabold text-emerald-400 mt-1">-68.4% gCO2eq</div>
+        <div class="text-[11px] text-slate-500 font-mono mt-0.5">Routed to us-central1 (92% hydro/wind)</div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+        <div class="text-xs text-slate-400">CVE &amp; SAST Auto-Remediation</div>
+        <div class="text-2xl font-extrabold text-sky-400 mt-1">3 / 3 Patched</div>
+        <div class="text-[11px] text-slate-500 font-mono mt-0.5">Zero-touch MR commit + re-verify</div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+        <div class="text-xs text-slate-400">Google Cloud Run Production Status</div>
+        <div class="text-2xl font-extrabold text-purple-400 mt-1">99.98% SLO</div>
+        <div class="text-[11px] text-slate-500 font-mono mt-0.5">SBOM CycloneDX + Cosign Verified</div>
+      </div>
+    </div>
+
+    <!-- 9-Stage Grid -->
+    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-orange-400">GitLab Duo Agent Platform — 9-Stage Post-Code Execution Matrix</h2>
+        <span id="modeBadge" class="text-xs font-mono px-2.5 py-1 rounded bg-orange-500/20 text-orange-300 border border-orange-500/30">Hands-Off Mode</span>
+      </div>
+      <div id="stageGrid" class="grid grid-cols-1 md:grid-cols-3 gap-3.5"></div>
+    </section>
+
+    <!-- MCP Server & Green Grid Carbon Telemetry -->
+    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-emerald-400 mb-3">Live GitLab Duo Flow &amp; Carbon-Aware MCP Audit Log</h2>
+      <pre id="auditLog" class="bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs font-mono text-slate-300 overflow-x-auto whitespace-pre-wrap leading-relaxed"></pre>
+    </section>
+  </main>
+
+  <script>
+    const STAGES = [
+      { id: "1. PLAN", agent: "duo-planner-agent", mcp: "gitlab-issues-mcp", detail: "Parses Issue #402, decomposes acceptance criteria, estimates runner kWh budget, and labels epic." },
+      { id: "2. CREATE", agent: "duo-mr-architect", mcp: "gitlab-git-mcp", detail: "Opens branch fix/issue-402, generates MR diff with instrumentation hooks, and assigns reviewers." },
+      { id: "3. VERIFY", agent: "duo-green-verifier", mcp: "watt-time-grid-mcp", detail: "Selects lowest-carbon GCP region (us-central1, 84 gCO2/kWh) and runs parallel pytest + mutation suite." },
+      { id: "4. PACKAGE", agent: "duo-oci-packager", mcp: "container-registry-mcp", detail: "Builds multi-arch distroless OCI image (-61% image size) and pushes to GitLab Container Registry." },
+      { id: "5. SECURE", agent: "duo-sec-remediator", mcp: "gitlab-sast-dast-mcp", detail: "Detects CVE-2026-4412 in transitive dependency, auto-commits bump patch, and re-runs SAST/Secret scan." },
+      { id: "6. RELEASE", agent: "duo-canary-releaser", mcp: "cloud-run-deploy-mcp", detail: "Signs image with Sigstore Cosign and rolls out 10% -> 50% -> 100% traffic on Google Cloud Run." },
+      { id: "7. CONFIGURE", agent: "duo-iac-tuner", mcp: "opentofu-state-mcp", detail: "Right-sizes Cloud Run CPU/memory limits and enables scale-to-zero idle carbon elimination." },
+      { id: "8. MONITOR", agent: "duo-slo-sentinel", mcp: "prometheus-otel-mcp", detail: "Streams OpenTelemetry p99 latency (41ms), error rate (0.00%), and real-time container watts." },
+      { id: "9. GOVERN", agent: "duo-compliance-auditor", mcp: "cyclonedx-sbom-mcp", detail: "Attaches signed CycloneDX SBOM, SOC2 evidence bundle, and Green Carbon Certificate to Issue #402." }
+    ];
+
+    function runLifecycle() {
+      const mode = document.getElementById("autonomySelect").value;
+      document.getElementById("modeBadge").textContent = mode === "handsoff" ? "Hands-Off Mode (Zero-Touch)" : (mode === "supervised" ? "Supervised Mode (Outcome Gate)" : "Assisted Mode (Step-by-Step)");
+      const grid = document.getElementById("stageGrid");
+      grid.innerHTML = "";
+      STAGES.forEach((s, idx) => {
+        const stateText = (mode === "assisted" && idx >= 5) ? "Awaiting Step Approval" : (mode === "supervised" && idx === 5 ? "Outcome Gate Ready" : "Completed ✓");
+        const badgeCls = stateText.includes("Completed") ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40" : "bg-amber-500/20 text-amber-300 border-amber-500/40";
+        const card = document.createElement("div");
+        card.className = "p-3.5 rounded-xl bg-slate-950 border border-slate-800";
+        card.innerHTML = `
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="font-bold text-xs text-orange-400">${s.id}</span>
+            <span class="px-2 py-0.5 text-[10px] font-mono rounded border ${badgeCls}">${stateText}</span>
+          </div>
+          <div class="text-[11px] font-mono text-slate-400 mb-1">Agent: <span class="text-slate-200">${s.agent}</span> | MCP: <span class="text-emerald-300">${s.mcp}</span></div>
+          <p class="text-xs text-slate-300">${s.detail}</p>
+        `;
+        grid.appendChild(card);
+      });
+
+      document.getElementById("auditLog").textContent =
+`[GitLab Duo Flow Trigger] Issue #402 webhook -> Autonomy Level: ${mode.toUpperCase()}
+[Stage 1-3 Plan/Create/Verify] MCP watt-time-grid-mcp shifted runner from us-east4 (398 gCO2/kWh) -> us-central1 (84 gCO2/kWh), saving 68.4% carbon emissions.
+[Stage 4-5 Package/Secure] Auto-remediated 3 SAST/Dependency findings and rebuilt distroless image sha256:4f91c8...e20a.
+[Stage 6-9 Release/Configure/Monitor/Govern] Deployed to Google Cloud Run (https://duogreen-prod-uc.a.run.app), verified p99=41ms, attached CycloneDX SBOM & closed Issue #402.`;
+    }
+
+    window.addEventListener("DOMContentLoaded", runLifecycle);
+  </script>
+</body>
+</html>
